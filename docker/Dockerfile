@@ -15,3 +15,5 @@ CMD ["/home/fedora/checkAndStart.sh"]
 
 # build
 # mvn clean package
+
+# start and stop see scripts directory
