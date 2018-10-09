@@ -1,77 +1,80 @@
-<!-- ~ Copyright 2015, 2018 Uppsala University Library ~ ~ This file is part of
-	Cora. ~ ~ Cora is free software: you can redistribute it and/or modify ~
-	it under the terms of the GNU General Public License as published by ~ the
-	Free Software Foundation, either version 3 of the License, or ~ (at your
-	option) any later version. ~ ~ Cora is distributed in the hope that it will 
-	be useful, ~ but WITHOUT ANY WARRANTY; without even the implied warranty 
-	of ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the ~ GNU General 
-	Public License for more details. ~ ~ You should have received a copy of the 
-	GNU General Public License ~ along with Cora. If not, see <http://www.gnu.org/licenses/>. -->
-
+<!--
+  ~ Copyright 2015, 2018 Uppsala University Library
+  ~
+  ~ This file is part of Cora.
+  ~
+  ~     Cora is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     Cora is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>se.uu.ub.cora</groupId>
-        <artifactId>cora-parent</artifactId>
-        <version>0.7-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>se.uu.ub.cora</groupId>
+		<artifactId>cora-parent</artifactId>
+		<version>0.7-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>alvin-cora-docker-fedora</artifactId>
-    <packaging>pom</packaging>
-    <version>3.8.1</version>
-    <name>Alvin Cora Fedora Repository Docker</name>
+	<artifactId>alvin-cora-docker-fedora</artifactId>
+	<packaging>pom</packaging>
+	<version>3.8.1</version>
+	<name>Alvin Cora Fedora Repository Docker</name>
 
-    <scm>
-        <connection>scm:git:https://github.com/lsu-ub-uu/alvin-cora-docker-fedora.git</connection>
-        <developerConnection>scm:git:https://github.com/lsu-ub-uu/alvin-cora-docker-fedora.git</developerConnection>
-        <url>https://github.com/lsu-ub-uu/alvin-cora-docker-fedora</url>
-    </scm>
+	<properties>
+		<outputDirectory>${project.build.directory}/docker2</outputDirectory>
+	</properties>
+
+	<scm>
+		<connection>scm:git:https://github.com/lsu-ub-uu/alvin-cora-docker-fedora.git</connection>
+		<developerConnection>scm:git:https://github.com/lsu-ub-uu/alvin-cora-docker-fedora.git</developerConnection>
+		<url>https://github.com/lsu-ub-uu/alvin-cora-docker-fedora</url>
+	</scm>
 
 
-    <build>
-        <plugins>
-            <!-- Does not work with FROM local images in the current version
-                        <plugin>
-                            <groupId>com.spotify</groupId>
-                            <artifactId>dockerfile-maven-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <id>default</id>
-                                    <goals>
-                                        <goal>build</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                            <configuration>
-                                <repository>alvin-cora-docker-fedora</repository>
-                                <tag>${project.version}</tag>
-                            </configuration>
-                        </plugin>
-            -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <imageName>alvin-cora-docker-fedora</imageName>
-                    <dockerDirectory>docker</dockerDirectory>
-                    <imageTags>
-                        <imageTag>${project.version}</imageTag>
-                    </imageTags>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>docker</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<configuration>
+					<contextDirectory>${outputDirectory}</contextDirectory>
+					<repository>alvin-cora-docker-fedora</repository>
+					<tag>${project.version}</tag>
+					<pullNewerImage>false</pullNewerImage>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
