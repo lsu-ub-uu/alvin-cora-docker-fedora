@@ -27,9 +27,9 @@
 		<version>0.8.6</version>
 	</parent>
 
-	<artifactId>alvin-cora-docker-fedora</artifactId>
+	<artifactId>alvin-cora-docker-fedora-3.8.1</artifactId>
 	<packaging>pom</packaging>
-	<version>3.8.1</version>
+	<version>1.0.0</version>
 	<name>Alvin Cora Fedora Repository Docker</name>
 
 	<properties>
@@ -70,7 +70,7 @@
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<configuration>
 					<contextDirectory>${outputDirectory}</contextDirectory>
-					<repository>alvin-cora-docker-fedora</repository>
+					<repository>alvin-cora-docker-fedora-3.8.1</repository>
 					<tag>${project.version}</tag>
 					<pullNewerImage>false</pullNewerImage>
 				</configuration>
