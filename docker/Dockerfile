@@ -4,6 +4,7 @@ USER root
 WORKDIR $USER_HOME
 
 RUN mkdir import
+COPY models/* import/
 COPY places/* import/
 
 COPY *.sh $USER_HOME/
