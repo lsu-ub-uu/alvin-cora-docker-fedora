@@ -1,4 +1,4 @@
-FROM cora-docker-fedora-3.8.1:1.0.1
+FROM cora-docker-fedora-3.8.1:1.0.2
 
 USER root
 WORKDIR $USER_HOME

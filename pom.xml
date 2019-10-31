@@ -24,12 +24,12 @@
 	<parent>
 		<groupId>se.uu.ub.cora</groupId>
 		<artifactId>cora-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.2</version>
 	</parent>
 
 	<artifactId>alvin-cora-docker-fedora-3.8.1</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>Alvin Cora Fedora Repository Docker</name>
 
 	<properties>
