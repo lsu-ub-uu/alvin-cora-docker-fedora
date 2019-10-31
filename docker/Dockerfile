@@ -8,7 +8,7 @@ COPY models/* import/
 COPY places/* import/
 
 COPY *.sh $USER_HOME/
-RUN chmod +x *.sh && chown -R $USER_NAME: *
+RUN chmod +x *.sh && chown -R $USER_NAME: .
 
 USER $USER_NAME
 
