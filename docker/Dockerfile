@@ -1,4 +1,4 @@
-FROM cora-docker-fedora-3.8.1:1.0.5
+FROM cora-docker-fedora-3.8.1:1.0.6
 
 USER root
 WORKDIR $USER_HOME
@@ -8,9 +8,8 @@ COPY models/* import/
 COPY places/* import/
 
 COPY *.sh $USER_HOME/
-RUN ls -la
+
 RUN chmod +x *.sh && chown -R $USER_NAME: .
-RUN ls -la
 
 USER $USER_NAME
 
