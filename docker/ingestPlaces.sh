@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Ingesting places"
 for FILE in `find import -type f`
