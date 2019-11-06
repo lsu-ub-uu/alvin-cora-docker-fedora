@@ -1,15 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 COUNTER=`find fedora38/data -name "info*place*" | wc -l`
 
 if [ $COUNTER -eq 0 ]
 then
-  startup.sh
-  sleep 5
+  ./startup.sh
   ./ingestPlaces.sh
-  sleep 1
-  shutdown.sh
-  sleep 5
+  ./shutdown.sh
 fi
 
 catalina.sh run
